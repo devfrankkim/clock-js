@@ -7,7 +7,6 @@
   </head>
   <body>
     <div class="clock">
-      <div class="title">Frank's Clock</div>
       <div class="clock-face">
         <div class="hand hour-hand"></div>
         <div class="hand min-hand"></div>
@@ -19,6 +18,7 @@
       const secondHand = document.querySelector(".second-hand");
       const minsHand = document.querySelector(".min-hand");
       const hourHand = document.querySelector(".hour-hand");
+      const allHands = document.querySelectorAll(".hand");
 
       function setDate() {
         const now = new Date();
@@ -27,6 +27,11 @@
         const secondsDegrees = (seconds / 60) * 360 + 90;
         secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
 
+        if (secondsDegrees === 90) {
+          allHands.forEach(hand => (hand.style.transition = "none"));
+        } else {
+          allHands.forEach(hand => (hand.style.transition = ""));
+        }
         const mins = now.getMinutes();
         const minsDegrees = (mins / 60) * 360 + (seconds / 60) * 6 + 90;
         minsHand.style.transform = `rotate(${minsDegrees}deg)`;
